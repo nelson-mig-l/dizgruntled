@@ -1,10 +1,11 @@
 package com.hugheth.dizgruntled.level;
 
+import java.util.Base64;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import biz.source_code.base64Coder.Base64Coder;
+//import biz.source_code.base64Coder.Base64Coder;
 
 /**
  * The Tile Packer packs and unpacks strings that represent the tiles of a layer.
@@ -37,12 +38,14 @@ public class TilePacker {
 		
 		int newLength = compresser.deflate(levelOut);
 		
-		return String.valueOf(Base64Coder.encode(levelOut, newLength));
+		//return String.valueOf(Base64Coder.encode(levelOut, newLength));
+		return Base64.getEncoder().encodeToString(levelOut);
 	}
 
 	public static String Unpack(String input, int size) {
 		
-		byte[] decoded = Base64Coder.decode(input);
+		//byte[] decoded = Base64Coder.decode(input);
+		byte[] decoded = Base64.getDecoder().decode(input);
 		
 		Inflater inflater = new Inflater();
 		
